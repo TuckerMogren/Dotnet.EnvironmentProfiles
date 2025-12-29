@@ -4,6 +4,11 @@ Dotnet.EnvironmentProfiles provides deterministic environment mapping for .NET a
 It lets you keep real-world environment names (QA, UAT, PreProd, etc.) while mapping them to
 canonical ASP.NET Core behavior (Development, Staging, Production).
 
+## NuGet Package
+
+Package metadata is defined in `Dotnet.EnvironmentProfiles.nuspec`. The changelog is in
+`CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
+
 ## Core Concepts
 
 - EnvironmentProfile is the source of truth for environment semantics.

@@ -5,9 +5,10 @@
     <version>1.0.0</version>
     <authors>Tucker Mogren</authors>
     <description>Deterministic environment profile mapping for .NET applications.</description>
+    <releaseNotes>Initial release with environment profiles, resolver, defaults, and DI extensions.</releaseNotes>
     <license type="expression">MIT</license>
     <projectUrl>https://tuckermogren.com/projects/DotnetEnvironmentProfiles</projectUrl>
-    <repository type="website">https://tuckermogren.com</repository>
+    <repository type="website">https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles</repository>
     <copyright>Copyright 2025 Tucker Mogren</copyright>
     <dependencies>
       <group targetFramework="net10.0">
@@ -16,4 +17,7 @@
       </group>
     </dependencies>
   </metadata>
+  <files>
+    <file src="CHANGELOG.md" target="" />
+  </files>
 </package>
