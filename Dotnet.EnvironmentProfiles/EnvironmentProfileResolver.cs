@@ -1,13 +1,8 @@
 namespace Dotnet.EnvironmentProfiles;
 
-public sealed class EnvironmentProfileResolver : IEnvironmentProfileResolver
+public sealed class EnvironmentProfileResolver(EnvironmentProfileResolverOptions options) : IEnvironmentProfileResolver
 {
-    private readonly EnvironmentProfileResolverOptions _options;
-
-    public EnvironmentProfileResolver(EnvironmentProfileResolverOptions options)
-    {
-        _options = options ?? throw new ArgumentNullException(nameof(options));
-    }
+    private readonly EnvironmentProfileResolverOptions _options = options ?? throw new ArgumentNullException(nameof(options));
 
     public EnvironmentProfile Resolve(string environmentName)
     {

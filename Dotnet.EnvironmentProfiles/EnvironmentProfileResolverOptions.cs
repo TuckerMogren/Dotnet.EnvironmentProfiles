@@ -32,10 +32,7 @@ public sealed class EnvironmentProfileResolverOptions
 
     public void AddProfiles(IEnumerable<EnvironmentProfile> profiles)
     {
-        if (profiles is null)
-        {
-            throw new ArgumentNullException(nameof(profiles));
-        }
+        ArgumentNullException.ThrowIfNull(profiles);
 
         foreach (var profile in profiles)
         {

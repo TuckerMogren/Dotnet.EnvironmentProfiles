@@ -1,12 +1,6 @@
 namespace Dotnet.EnvironmentProfiles;
 
-public sealed class EnvironmentProfileResolutionException : InvalidOperationException
+public sealed class EnvironmentProfileResolutionException(string environmentName) : InvalidOperationException($"No environment profile is configured for '{environmentName}'.")
 {
-    public EnvironmentProfileResolutionException(string environmentName)
-        : base($"No environment profile is configured for '{environmentName}'.")
-    {
-        EnvironmentName = environmentName;
-    }
-
-    public string EnvironmentName { get; }
+    public string EnvironmentName { get; } = environmentName;
 }
