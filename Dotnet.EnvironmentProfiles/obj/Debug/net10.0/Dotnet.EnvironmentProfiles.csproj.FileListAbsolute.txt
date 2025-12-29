@@ -1,0 +1,12 @@
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/bin/Debug/net10.0/Dotnet.EnvironmentProfiles.deps.json
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/bin/Debug/net10.0/Dotnet.EnvironmentProfiles.dll
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/bin/Debug/net10.0/Dotnet.EnvironmentProfiles.pdb
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.csproj.AssemblyReference.cache
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.AssemblyInfoInputs.cache
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.AssemblyInfo.cs
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.csproj.CoreCompileInputs.cache
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.dll
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/refint/Dotnet.EnvironmentProfiles.dll
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/Dotnet.EnvironmentProfiles.pdb
+/Users/tuckermogren/Repos/Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles/obj/Debug/net10.0/ref/Dotnet.EnvironmentProfiles.dll
