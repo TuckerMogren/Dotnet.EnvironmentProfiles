@@ -24,7 +24,7 @@ jobs:
         run: dotnet build Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles.csproj -c Release --no-restore
 
       - name: Test
-        run: dotnet test Dotnet.EnvironmentProfiles.Tests/Dotnet.EnvironmentProfiles.Tests.csproj -c Release --no-build
+        run: dotnet test Dotnet.EnvironmentProfiles.Tests/Dotnet.EnvironmentProfiles.Tests.csproj -c Release
 
       - name: Pack
         run: dotnet pack Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles.csproj -c Release --no-build -o ./artifacts
