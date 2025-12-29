@@ -515,8 +515,12 @@
           }
         },
         "centralPackageVersions": {
+          "coverlet.collector": "6.0.4",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0",
-          "Microsoft.Extensions.Hosting.Abstractions": "10.0.0"
+          "Microsoft.Extensions.Hosting.Abstractions": "10.0.0",
+          "Microsoft.NET.Test.Sdk": "17.14.1",
+          "xunit": "2.9.3",
+          "xunit.runner.visualstudio": "3.1.4"
         },
         "imports": [
           "net461",
