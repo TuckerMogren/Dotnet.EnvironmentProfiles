@@ -20,15 +20,16 @@ Package metadata is defined in `Dotnet.EnvironmentProfiles.nuspec`. The changelo
 The resolver ships with the following defaults. You can override or replace them via DI.
 
 | Profile Name | Canonical Environment |
-|-------------|-----------------------|
-| Development | Development           |
-| Local       | Development           |
-| Staging     | Staging               |
-| QA          | Staging               |
-| UAT         | Staging               |
-| CDE         | Staging               |
-| PreProd     | Staging               |
-| Production  | Production            |
+| :----------- | :-------------------- |
+| CDE.         | Development           |
+| Development  | Development           |
+| Local        | Development           |
+| Staging      | Staging               |
+| QA           | Staging               |
+| UAT          | Staging               |
+| NonProd      | Staging               |
+| PreProd      | Staging               |
+| Production   | Production            |
 
 ## Usage
 
