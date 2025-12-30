@@ -1,5 +1,7 @@
 # Dotnet.EnvironmentProfiles
 
+[![Publish NuGet](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml/badge.svg?branch=main)](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml)
+
 Dotnet.EnvironmentProfiles provides deterministic environment mapping for .NET applications.
 It lets you keep real-world environment names (QA, UAT, PreProd, etc.) while mapping them to
 canonical ASP.NET Core behavior (Development, Staging, Production).

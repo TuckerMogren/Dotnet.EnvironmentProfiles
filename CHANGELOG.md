@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog (https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.0] - 2025-12-30
+
+### Added
+- xUnit test project covering resolver and extension behavior.
+- GitHub Actions publish workflow and packaging tweaks.
+- Package readme and changelog inclusion in the nupkg.
+
 ## [0.1.0] - 2025-12-29
 
 ### Added
