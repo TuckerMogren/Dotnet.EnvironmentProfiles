@@ -7,6 +7,7 @@
     <description>Deterministic environment profile mapping for .NET applications.</description>
     <releaseNotes>Initial release with environment profiles, resolver, defaults, and DI extensions.</releaseNotes>
     <license type="expression">MIT</license>
+    <readme>README.md</readme>
     <projectUrl>https://tuckermogren.com/projects/DotnetEnvironmentProfiles</projectUrl>
     <repository type="website">https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles</repository>
     <copyright>Copyright 2025 Tucker Mogren</copyright>
@@ -18,6 +19,8 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="Dotnet.EnvironmentProfiles/bin/$configuration$/$targetFramework$/Dotnet.EnvironmentProfiles.dll" target="lib/$targetFramework$" />
+    <file src="README.md" target="" />
     <file src="CHANGELOG.md" target="" />
   </files>
 </package>
