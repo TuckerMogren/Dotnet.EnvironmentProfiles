@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Environments.EnvironmentMappings.Tests;
 
+[Collection("EnvironmentVariables")]
 public class EnvironmentProfileTests
 {
     [Theory]
@@ -93,6 +94,76 @@ public class EnvironmentProfileTests
 
         Assert.Equal(EnvironmentProfileNames.Uat, profile.Name);
         Assert.Equal(CanonicalEnvironment.Staging, profile.CanonicalEnvironment);
+    }
+
+    [Fact]
+    public void Resolver_Uses_DotnetEnvironment_When_Set()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, "QA");
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, "Production");
+
+            var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
+
+            var profile = resolver.ResolveFromEnvironmentVariables();
+
+            Assert.Equal(EnvironmentProfileNames.Qa, profile.Name);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
+    }
+
+    [Fact]
+    public void Resolver_Uses_AspNetCoreEnvironment_When_DotnetEnvironment_Missing()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, null);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, "UAT");
+
+            var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
+
+            var profile = resolver.ResolveFromEnvironmentVariables();
+
+            Assert.Equal(EnvironmentProfileNames.Uat, profile.Name);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
+    }
+
+    [Fact]
+    public void Resolver_Throws_When_Environment_Variables_Missing()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, null);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, null);
+
+            var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
+
+            Assert.Throws<InvalidOperationException>(() => resolver.ResolveFromEnvironmentVariables());
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
     }
 
     private sealed class TestHostEnvironment : IHostEnvironment

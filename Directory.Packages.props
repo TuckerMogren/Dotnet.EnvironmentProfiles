@@ -1,6 +1,5 @@
 <Project>
   <PropertyGroup>
-    <undefined></undefined>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>

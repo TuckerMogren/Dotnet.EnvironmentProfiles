@@ -55,6 +55,17 @@ var profile = resolver.Resolve("QA");
 var isNonProd = profile.IsNonProduction();
 ```
 
+## Environment Variable Resolution
+
+If you're not using `IHostEnvironment`, you can resolve directly from environment variables. The resolver
+checks `DOTNET_ENVIRONMENT` first, then falls back to `ASPNETCORE_ENVIRONMENT`.
+
+```csharp
+using Environments.EnvironmentMappings.Extensions;
+
+var profile = resolver.ResolveFromEnvironmentVariables();
+```
+
 ## Host Environment Integration
 
 ```csharp

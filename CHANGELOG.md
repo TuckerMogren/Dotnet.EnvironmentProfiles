@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.7] - 2025-12-30
+
+### Added (0.2.7)
+
+- Added `DOTNET_ENVIRONMENT` + `ASPNETCORE_ENVIRONMENT` resolver helper.
+- Added environment variable name constants.
+
 ## [0.2.6] - 2025-12-30
 
 ### Added (0.2.6)
