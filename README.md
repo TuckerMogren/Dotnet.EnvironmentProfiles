@@ -11,6 +11,7 @@ canonical ASP.NET Core behavior (Development, Staging, Production).
 Package ID: `Environments.EnvironmentMappings`. Namespace: `Environments.EnvironmentMappings`.
 Package metadata is defined in `Environments.EnvironmentMappings.nuspec`. The changelog is in
 `CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
+Targets: `net6.0` and `net10.0`.
 
 ## Core Concepts
 
