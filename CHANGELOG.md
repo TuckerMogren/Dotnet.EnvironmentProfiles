@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.8] - 2025-12-30
+
+### Added (0.2.8)
+
+- Added canonical host environment mapping helper for `DOTNET_ENVIRONMENT` and `ASPNETCORE_ENVIRONMENT`.
+- Added `QualityAssurance` profile alias and remapped `CDE` to Development by default.
+
 ## [0.2.7] - 2025-12-30
 
 ### Added (0.2.7)

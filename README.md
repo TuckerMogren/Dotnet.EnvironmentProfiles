@@ -25,12 +25,13 @@ The resolver ships with the following defaults. You can override or replace them
 
 | Profile Name | Canonical Environment |
 | :----------- | :-------------------- |
+| CDE          | Development           |
 | Development  | Development           |
 | Local        | Development           |
 | Staging      | Staging               |
 | QA           | Staging               |
+| QualityAssurance | Staging           |
 | UAT          | Staging               |
-| CDE          | Staging               |
 | PreProd      | Staging               |
 | Production   | Production            |
 
@@ -64,6 +65,18 @@ checks `DOTNET_ENVIRONMENT` first, then falls back to `ASPNETCORE_ENVIRONMENT`.
 using Environments.EnvironmentMappings.Extensions;
 
 var profile = resolver.ResolveFromEnvironmentVariables();
+```
+
+## Canonical Host Environment
+
+If you want ASP.NET Core's built-in environment checks (like `IsDevelopment()`) to behave according to
+your profile mappings, you can set the host environment to the canonical value before building the host.
+
+```csharp
+using Environments.EnvironmentMappings.Extensions;
+
+var builder = Host.CreateDefaultBuilder(args)
+    .UseCanonicalEnvironmentMappings();
 ```
 
 ## Host Environment Integration

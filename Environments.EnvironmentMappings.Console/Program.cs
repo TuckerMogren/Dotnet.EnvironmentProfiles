@@ -1,12 +1,27 @@
 using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Extensions;
+using Microsoft.Extensions.Configuration;
 
 var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
 
 var dotnetEnvironment = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
 var aspnetEnvironment = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+var configEnvironment = dotnetEnvironment ?? aspnetEnvironment;
 
-Console.WriteLine($"DOTNET_ENVIRONMENT: {dotnetEnvironment ?? "(not set)"}");
-Console.WriteLine($"ASPNETCORE_ENVIRONMENT: {aspnetEnvironment ?? "(not set)"}");
+var configBuilder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
+
+if (!string.IsNullOrWhiteSpace(configEnvironment))
+{
+    configBuilder.AddJsonFile($"appsettings.{configEnvironment}.json", optional: true, reloadOnChange: false);
+}
+
+var configuration = configBuilder
+    .AddEnvironmentVariables()
+    .Build();
+
+var configuredName = configuration["EnvironmentMappings:EnvironmentName"];
 
 try
 {
@@ -15,6 +30,10 @@ try
     if (args.Length > 0 && !string.IsNullOrWhiteSpace(args[0]))
     {
         profile = resolver.Resolve(args[0]);
+    }
+    else if (!string.IsNullOrWhiteSpace(configuredName))
+    {
+        profile = resolver.Resolve(configuredName);
     }
     else
     {
