@@ -1,14 +1,15 @@
-# Dotnet.EnvironmentProfiles
+# Environments.EnvironmentMappings
 
 [![Publish NuGet](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml/badge.svg?branch=main)](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml)
 
-Dotnet.EnvironmentProfiles provides deterministic environment mapping for .NET applications.
+Environments.EnvironmentMappings provides deterministic environment mapping for .NET applications.
 It lets you keep real-world environment names (QA, UAT, PreProd, etc.) while mapping them to
 canonical ASP.NET Core behavior (Development, Staging, Production).
 
 ## NuGet Package
 
-Package metadata is defined in `Dotnet.EnvironmentProfiles.nuspec`. The changelog is in
+Package ID: `Environments.EnvironmentMappings`. Namespace: `Environments.EnvironmentMappings`.
+Package metadata is defined in `Environments.EnvironmentMappings.nuspec`. The changelog is in
 `CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
 
 ## Core Concepts
@@ -23,21 +24,20 @@ The resolver ships with the following defaults. You can override or replace them
 
 | Profile Name | Canonical Environment |
 | :----------- | :-------------------- |
-| CDE.         | Development           |
 | Development  | Development           |
 | Local        | Development           |
 | Staging      | Staging               |
 | QA           | Staging               |
 | UAT          | Staging               |
-| NonProd      | Staging               |
+| CDE          | Staging               |
 | PreProd      | Staging               |
 | Production   | Production            |
 
 ## Usage
 
 ```csharp
-using Dotnet.EnvironmentProfiles;
-using Dotnet.EnvironmentProfiles.Extensions;
+using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Extensions;
 
 var services = new ServiceCollection();
 services.AddEnvironmentProfiles(options =>
@@ -57,7 +57,7 @@ var isNonProd = profile.IsNonProduction();
 ## Host Environment Integration
 
 ```csharp
-using Dotnet.EnvironmentProfiles.Extensions;
+using Environments.EnvironmentMappings.Extensions;
 using Microsoft.Extensions.Hosting;
 
 IHostEnvironment hostEnvironment = ...;

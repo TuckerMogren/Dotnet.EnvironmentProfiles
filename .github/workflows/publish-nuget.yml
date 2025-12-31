@@ -21,13 +21,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles.csproj -c Release --no-restore
+        run: dotnet build Environments.EnvironmentMappings/Environments.EnvironmentMappings.csproj -c Release --no-restore
 
       - name: Test
-        run: dotnet test Dotnet.EnvironmentProfiles.Tests/Dotnet.EnvironmentProfiles.Tests.csproj -c Release
+        run: dotnet test Environments.EnvironmentMappings.Tests/Environments.EnvironmentMappings.Tests.csproj -c Release
 
       - name: Pack
-        run: dotnet pack Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles.csproj -c Release --no-build -o ./artifacts
+        run: dotnet pack Environments.EnvironmentMappings/Environments.EnvironmentMappings.csproj -c Release --no-build -o ./artifacts
 
       - name: Publish to NuGet
         run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGETAPIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

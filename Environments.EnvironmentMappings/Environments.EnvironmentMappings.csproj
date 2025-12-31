@@ -3,7 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <NuspecFile>..\Dotnet.EnvironmentProfiles.nuspec</NuspecFile>
+    <NuspecFile>..\Environments.EnvironmentMappings.nuspec</NuspecFile>
     <NuspecProperties>configuration=$(Configuration);targetFramework=$(TargetFramework)</NuspecProperties>
   </PropertyGroup>
   <ItemGroup>

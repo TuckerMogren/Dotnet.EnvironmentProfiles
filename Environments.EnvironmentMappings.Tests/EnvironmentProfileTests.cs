@@ -1,9 +1,9 @@
-using Dotnet.EnvironmentProfiles;
-using Dotnet.EnvironmentProfiles.Extensions;
+using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
-namespace Dotnet.EnvironmentProfiles.Tests;
+namespace Environments.EnvironmentMappings.Tests;
 
 public class EnvironmentProfileTests
 {

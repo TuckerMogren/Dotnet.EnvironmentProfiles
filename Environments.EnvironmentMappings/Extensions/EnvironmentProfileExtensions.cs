@@ -1,6 +1,6 @@
-using Dotnet.EnvironmentProfiles;
+using Environments.EnvironmentMappings;
 
-namespace Dotnet.EnvironmentProfiles.Extensions;
+namespace Environments.EnvironmentMappings.Extensions;
 
 public static class EnvironmentProfileExtensions
 {

@@ -1,7 +1,7 @@
-using Dotnet.EnvironmentProfiles;
+using Environments.EnvironmentMappings;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet.EnvironmentProfiles.Extensions;
+namespace Environments.EnvironmentMappings.Extensions;
 
 public static class ServiceCollectionExtensions
 {

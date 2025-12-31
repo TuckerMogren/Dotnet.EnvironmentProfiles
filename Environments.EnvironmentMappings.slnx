@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Environments.EnvironmentMappings/Environments.EnvironmentMappings.csproj" />
+  <Project Path="Environments.EnvironmentMappings.Tests/Environments.EnvironmentMappings.Tests.csproj" />
+</Solution>

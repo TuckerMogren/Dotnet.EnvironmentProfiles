@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Environments.EnvironmentMappings</id>
+    <version>0.2.5</version>
+    <authors>Tucker Mogren</authors>
+    <description>Deterministic environment profile mapping for .NET applications.</description>
+    <releaseNotes>Pre-release rename to align namespaces, project, and package ID.</releaseNotes>
+    <license type="expression">MIT</license>
+    <readme>README.md</readme>
+    <projectUrl>https://tuckermogren.com/projects/DotnetEnvironmentProfiles</projectUrl>
+    <repository type="git" url="https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles" />
+    <tags>environment profiles mapping aspnetcore hosting configuration sdlc</tags>
+    <copyright>Copyright (c) Tucker Mogren 2025</copyright>
+    <dependencies>
+      <group targetFramework="net10.0">
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="[10.0.0, )" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="[10.0.0, )" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Environments.EnvironmentMappings/bin/$configuration$/$targetFramework$/Environments.EnvironmentMappings.dll" target="lib/$targetFramework$" />
+    <file src="README.md" target="" />
+    <file src="CHANGELOG.md" target="" />
+  </files>
+</package>

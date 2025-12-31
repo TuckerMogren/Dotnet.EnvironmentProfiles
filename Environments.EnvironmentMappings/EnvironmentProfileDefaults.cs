@@ -1,4 +1,4 @@
-namespace Dotnet.EnvironmentProfiles;
+namespace Environments.EnvironmentMappings;
 
 public static class EnvironmentProfileDefaults
 {
