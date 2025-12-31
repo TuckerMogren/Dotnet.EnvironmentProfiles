@@ -1,0 +1,11 @@
+{
+  "dotnet-test-explorer.testProjectPath": "**/*.Tests.csproj",
+  "dotnet-test-explorer.buildArguments": [
+    "--configuration",
+    "Debug"
+  ],
+  "dotnet-test-explorer.testArguments": [
+    "--framework",
+    "net10.0"
+  ]
+}
