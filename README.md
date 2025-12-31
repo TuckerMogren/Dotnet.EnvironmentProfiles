@@ -1,15 +1,17 @@
-# Dotnet.EnvironmentProfiles
+# Environments.EnvironmentMappings
 
 [![Publish NuGet](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml/badge.svg?branch=main)](https://github.com/TuckerMogren/Dotnet.EnvironmentProfiles/actions/workflows/publish-nuget.yml)
 
-Dotnet.EnvironmentProfiles provides deterministic environment mapping for .NET applications.
+Environments.EnvironmentMappings provides deterministic environment mapping for .NET applications.
 It lets you keep real-world environment names (QA, UAT, PreProd, etc.) while mapping them to
 canonical ASP.NET Core behavior (Development, Staging, Production).
 
 ## NuGet Package
 
-Package metadata is defined in `Dotnet.EnvironmentProfiles.nuspec`. The changelog is in
+Package ID: `Environments.EnvironmentMappings`. Namespace: `Environments.EnvironmentMappings`.
+Package metadata is defined in `Environments.EnvironmentMappings.nuspec`. The changelog is in
 `CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
+Targets: `net6.0` and `net10.0`.
 
 ## Core Concepts
 
@@ -23,21 +25,21 @@ The resolver ships with the following defaults. You can override or replace them
 
 | Profile Name | Canonical Environment |
 | :----------- | :-------------------- |
-| CDE.         | Development           |
+| CDE          | Development           |
 | Development  | Development           |
 | Local        | Development           |
 | Staging      | Staging               |
 | QA           | Staging               |
+| QualityAssurance | Staging           |
 | UAT          | Staging               |
-| NonProd      | Staging               |
 | PreProd      | Staging               |
 | Production   | Production            |
 
 ## Usage
 
 ```csharp
-using Dotnet.EnvironmentProfiles;
-using Dotnet.EnvironmentProfiles.Extensions;
+using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Extensions;
 
 var services = new ServiceCollection();
 services.AddEnvironmentProfiles(options =>
@@ -54,10 +56,33 @@ var profile = resolver.Resolve("QA");
 var isNonProd = profile.IsNonProduction();
 ```
 
+## Environment Variable Resolution
+
+If you're not using `IHostEnvironment`, you can resolve directly from environment variables. The resolver
+checks `DOTNET_ENVIRONMENT` first, then falls back to `ASPNETCORE_ENVIRONMENT`.
+
+```csharp
+using Environments.EnvironmentMappings.Extensions;
+
+var profile = resolver.ResolveFromEnvironmentVariables();
+```
+
+## Canonical Host Environment
+
+If you want ASP.NET Core's built-in environment checks (like `IsDevelopment()`) to behave according to
+your profile mappings, you can set the host environment to the canonical value before building the host.
+
+```csharp
+using Environments.EnvironmentMappings.Extensions;
+
+var builder = Host.CreateDefaultBuilder(args)
+    .UseCanonicalEnvironmentMappings();
+```
+
 ## Host Environment Integration
 
 ```csharp
-using Dotnet.EnvironmentProfiles.Extensions;
+using Environments.EnvironmentMappings.Extensions;
 using Microsoft.Extensions.Hosting;
 
 IHostEnvironment hostEnvironment = ...;

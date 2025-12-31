@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="Dotnet.EnvironmentProfiles/Dotnet.EnvironmentProfiles.csproj" />
-  <Project Path="Dotnet.EnvironmentProfiles.Tests/Dotnet.EnvironmentProfiles.Tests.csproj" />
-</Solution>
