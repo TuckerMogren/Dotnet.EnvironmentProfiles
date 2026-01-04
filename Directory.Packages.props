@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="Environments.EnvironmentMappings" Version="0.3.0" />
+    <PackageVersion Include="Environments.EnvironmentMappings" Version="0.2.8" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
