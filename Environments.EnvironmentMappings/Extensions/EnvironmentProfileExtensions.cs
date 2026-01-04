@@ -14,10 +14,7 @@ public static class EnvironmentProfileExtensions
     /// <returns><see langword="true"/> if the profile is QA; otherwise, <see langword="false"/>.</returns>
     public static bool IsQa(this EnvironmentProfile profile)
     {
-        if (profile is null)
-        {
-            throw new ArgumentNullException(nameof(profile));
-        }
+        ArgumentNullException.ThrowIfNull(profile);
 
         return string.Equals(profile.Name, EnvironmentProfileNames.Qa, StringComparison.OrdinalIgnoreCase);
     }
@@ -29,10 +26,7 @@ public static class EnvironmentProfileExtensions
     /// <returns><see langword="true"/> if the profile is UAT; otherwise, <see langword="false"/>.</returns>
     public static bool IsUat(this EnvironmentProfile profile)
     {
-        if (profile is null)
-        {
-            throw new ArgumentNullException(nameof(profile));
-        }
+        ArgumentNullException.ThrowIfNull(profile);
 
         return string.Equals(profile.Name, EnvironmentProfileNames.Uat, StringComparison.OrdinalIgnoreCase);
     }
@@ -44,10 +38,7 @@ public static class EnvironmentProfileExtensions
     /// <returns><see langword="true"/> if the profile is not production; otherwise, <see langword="false"/>.</returns>
     public static bool IsNonProduction(this EnvironmentProfile profile)
     {
-        if (profile is null)
-        {
-            throw new ArgumentNullException(nameof(profile));
-        }
+        ArgumentNullException.ThrowIfNull(profile);
 
         return profile.CanonicalEnvironment != CanonicalEnvironment.Production;
     }

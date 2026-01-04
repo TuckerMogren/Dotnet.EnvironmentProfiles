@@ -14,10 +14,7 @@ public static class EnvironmentProfileResolverExtensions
     /// <returns>The resolved environment profile.</returns>
     public static EnvironmentProfile ResolveFromEnvironmentVariables(this IEnvironmentProfileResolver resolver)
     {
-        if (resolver is null)
-        {
-            throw new ArgumentNullException(nameof(resolver));
-        }
+        ArgumentNullException.ThrowIfNull(resolver);
 
         var environmentName = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
         if (string.IsNullOrWhiteSpace(environmentName))

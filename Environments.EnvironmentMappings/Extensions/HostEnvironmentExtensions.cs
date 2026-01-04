@@ -18,15 +18,9 @@ public static class HostEnvironmentExtensions
         this IHostEnvironment hostEnvironment,
         IEnvironmentProfileResolver resolver)
     {
-        if (hostEnvironment is null)
-        {
-            throw new ArgumentNullException(nameof(hostEnvironment));
-        }
+        ArgumentNullException.ThrowIfNull(hostEnvironment);
 
-        if (resolver is null)
-        {
-            throw new ArgumentNullException(nameof(resolver));
-        }
+        ArgumentNullException.ThrowIfNull(resolver);
 
         return resolver.Resolve(hostEnvironment.EnvironmentName);
     }

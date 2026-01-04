@@ -44,10 +44,7 @@ public sealed class EnvironmentProfileResolverOptions
     /// <param name="profile">The profile to add or replace.</param>
     public void SetProfile(EnvironmentProfile profile)
     {
-        if (profile is null)
-        {
-            throw new ArgumentNullException(nameof(profile));
-        }
+        ArgumentNullException.ThrowIfNull(profile);
 
         _profiles[profile.Name] = profile;
     }

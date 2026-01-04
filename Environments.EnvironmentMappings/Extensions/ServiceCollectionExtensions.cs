@@ -18,10 +18,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         Action<EnvironmentProfileResolverOptions>? configure = null)
     {
-        if (services is null)
-        {
-            throw new ArgumentNullException(nameof(services));
-        }
+        ArgumentNullException.ThrowIfNull(services);
 
         var options = new EnvironmentProfileResolverOptions();
         configure?.Invoke(options);

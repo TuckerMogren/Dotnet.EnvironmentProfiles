@@ -20,10 +20,7 @@ public static class HostBuilderEnvironmentExtensions
         this IHostBuilder hostBuilder,
         Action<EnvironmentProfileResolverOptions>? configure = null)
     {
-        if (hostBuilder is null)
-        {
-            throw new ArgumentNullException(nameof(hostBuilder));
-        }
+        ArgumentNullException.ThrowIfNull(hostBuilder);
 
         var options = new EnvironmentProfileResolverOptions();
         configure?.Invoke(options);
