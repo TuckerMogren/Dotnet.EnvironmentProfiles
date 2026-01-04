@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.0] - 2026-01-03
+
+### Added (1.0.0)
+
+- Added XML documentation across public APIs.
+- Added canonical environment helpers on `EnvironmentProfile` (`IsDevelopment`, `IsStaging`, `IsProduction`, `IsPerformance`, `IsEnvironment`).
+- Added default aliases for `Dev`, `Local`, and `Performance`.
+
+### Changed (1.0.0)
+
+- Reorganized namespaces to align with the folder structure (Constants, Models, Options, Defaults, Resolvers, Exceptions, Abstractions).
+
 ## [0.3.0] - 2026-01-03
 
 ### Added (0.3.0)
