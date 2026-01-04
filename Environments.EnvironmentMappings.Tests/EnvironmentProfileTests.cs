@@ -1,5 +1,10 @@
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
+using Environments.EnvironmentMappings.Constants;
+using Environments.EnvironmentMappings.Exceptions;
 using Environments.EnvironmentMappings.Extensions;
+using Environments.EnvironmentMappings.Models;
+using Environments.EnvironmentMappings.Options;
+using Environments.EnvironmentMappings.Resolvers;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
@@ -77,13 +82,29 @@ public class EnvironmentProfileTests
     public void EnvironmentProfileExtensions_Use_Profile_Name_And_Canonical_Environment()
     {
         var qaProfile = new EnvironmentProfile("qa", CanonicalEnvironment.Staging);
+        var devProfile = new EnvironmentProfile("dev", CanonicalEnvironment.Development);
         var prodProfile = new EnvironmentProfile(EnvironmentProfileNames.Production, CanonicalEnvironment.Production);
 
         Assert.True(qaProfile.IsQa());
         Assert.False(qaProfile.IsUat());
         Assert.True(qaProfile.IsNonProduction());
+        Assert.True(qaProfile.IsStaging());
+        Assert.False(qaProfile.IsDevelopment());
+        Assert.False(qaProfile.IsProduction());
+        Assert.True(qaProfile.IsEnvironment("QA"));
+        Assert.True(qaProfile.IsEnvironment("Staging"));
+        Assert.False(qaProfile.IsEnvironment("Production"));
+
+        Assert.True(devProfile.IsDevelopment());
+        Assert.False(devProfile.IsStaging());
+        Assert.False(devProfile.IsProduction());
+        Assert.True(devProfile.IsEnvironment("Development"));
 
         Assert.False(prodProfile.IsNonProduction());
+        Assert.True(prodProfile.IsProduction());
+        Assert.False(prodProfile.IsDevelopment());
+        Assert.False(prodProfile.IsStaging());
+        Assert.True(prodProfile.IsEnvironment("Production"));
     }
 
     [Fact]

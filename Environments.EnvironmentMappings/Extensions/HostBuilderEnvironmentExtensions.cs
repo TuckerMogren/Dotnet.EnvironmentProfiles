@@ -1,20 +1,28 @@
 using System.Collections.Generic;
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Constants;
+using Environments.EnvironmentMappings.Options;
+using Environments.EnvironmentMappings.Resolvers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Environments.EnvironmentMappings.Extensions;
 
+/// <summary>
+/// Extension methods for <see cref="IHostBuilder"/> to apply canonical environment mappings.
+/// </summary>
 public static class HostBuilderEnvironmentExtensions
 {
+    /// <summary>
+    /// Maps the current environment name to a canonical environment and applies it to the host configuration.
+    /// </summary>
+    /// <param name="hostBuilder">The host builder to configure.</param>
+    /// <param name="configure">An optional callback to configure resolver options.</param>
+    /// <returns>The configured host builder.</returns>
     public static IHostBuilder UseCanonicalEnvironmentMappings(
         this IHostBuilder hostBuilder,
         Action<EnvironmentProfileResolverOptions>? configure = null)
     {
-        if (hostBuilder is null)
-        {
-            throw new ArgumentNullException(nameof(hostBuilder));
-        }
+        ArgumentNullException.ThrowIfNull(hostBuilder);
 
         var options = new EnvironmentProfileResolverOptions();
         configure?.Invoke(options);

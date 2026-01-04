@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Environments.EnvironmentMappings</id>
-    <version>0.2.8</version>
+    <version>0.3.0</version>
     <authors>Tucker Mogren</authors>
     <description>Deterministic environment profile mapping for .NET applications.</description>
-    <releaseNotes>Pre-release update adding canonical host environment mapping.</releaseNotes>
+    <releaseNotes>Namespace reorganization with new EnvironmentProfile helpers and XML documentation.</releaseNotes>
     <license type="expression">MIT</license>
     <readme>README.md</readme>
     <projectUrl>https://tuckermogren.com/projects/DotnetEnvironmentProfiles</projectUrl>

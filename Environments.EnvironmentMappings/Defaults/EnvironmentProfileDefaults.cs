@@ -1,7 +1,16 @@
-namespace Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Constants;
+using Environments.EnvironmentMappings.Models;
 
+namespace Environments.EnvironmentMappings.Defaults;
+
+/// <summary>
+/// Provides default environment profile mappings.
+/// </summary>
 public static class EnvironmentProfileDefaults
 {
+    /// <summary>
+    /// Gets the default profiles that map to canonical environments.
+    /// </summary>
     public static IReadOnlyList<EnvironmentProfile> Profiles { get; } =
         new List<EnvironmentProfile>
         {

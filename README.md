@@ -8,7 +8,7 @@ canonical ASP.NET Core behavior (Development, Staging, Production).
 
 ## NuGet Package
 
-Package ID: `Environments.EnvironmentMappings`. Namespace: `Environments.EnvironmentMappings`.
+Package ID: `Environments.EnvironmentMappings`. Namespaces: `Environments.EnvironmentMappings.*`.
 Package metadata is defined in `Environments.EnvironmentMappings.nuspec`. The changelog is in
 `CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
 Targets: `net6.0` and `net10.0`.
@@ -38,8 +38,10 @@ The resolver ships with the following defaults. You can override or replace them
 ## Usage
 
 ```csharp
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
 using Environments.EnvironmentMappings.Extensions;
+using Environments.EnvironmentMappings.Models;
+using Environments.EnvironmentMappings.Options;
 
 var services = new ServiceCollection();
 services.AddEnvironmentProfiles(options =>
@@ -54,6 +56,9 @@ var resolver = provider.GetRequiredService<IEnvironmentProfileResolver>();
 
 var profile = resolver.Resolve("QA");
 var isNonProd = profile.IsNonProduction();
+var isStaging = profile.IsStaging();
+var isQa = profile.IsEnvironment("QA");
+var isCanonical = profile.IsEnvironment("Staging");
 ```
 
 ## Environment Variable Resolution
@@ -79,10 +84,32 @@ var builder = Host.CreateDefaultBuilder(args)
     .UseCanonicalEnvironmentMappings();
 ```
 
+## Environment Profile Checks
+
+Environment profiles also expose convenience checks that mirror the host environment extensions. These
+operate on the profile's canonical environment and can also match the profile name when using
+`IsEnvironment`.
+
+```csharp
+var profile = resolver.Resolve("QA");
+
+if (profile.IsStaging())
+{
+    // Canonical environment check.
+}
+
+if (profile.IsEnvironment("QA"))
+{
+    // Matches the profile name.
+}
+```
+
 ## Host Environment Integration
 
 ```csharp
+using Environments.EnvironmentMappings.Abstractions;
 using Environments.EnvironmentMappings.Extensions;
+using Environments.EnvironmentMappings.Models;
 using Microsoft.Extensions.Hosting;
 
 IHostEnvironment hostEnvironment = ...;
