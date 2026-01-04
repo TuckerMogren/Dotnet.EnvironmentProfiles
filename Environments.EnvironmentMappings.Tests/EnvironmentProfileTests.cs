@@ -26,6 +26,7 @@ public class EnvironmentProfileTests
     [InlineData("QA", EnvironmentProfileNames.Qa, CanonicalEnvironment.Staging)]
     [InlineData("qa", EnvironmentProfileNames.Qa, CanonicalEnvironment.Staging)]
     [InlineData("CDE", EnvironmentProfileNames.Cde, CanonicalEnvironment.Development)]
+    [InlineData("Dev", EnvironmentProfileNames.Dev, CanonicalEnvironment.Development)]
     [InlineData("QualityAssurance", EnvironmentProfileNames.QualityAssurance, CanonicalEnvironment.Staging)]
     [InlineData("Local", EnvironmentProfileNames.Local, CanonicalEnvironment.Development)]
     [InlineData("Production", EnvironmentProfileNames.Production, CanonicalEnvironment.Production)]

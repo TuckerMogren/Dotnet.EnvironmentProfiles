@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Environments.EnvironmentMappings.Constants;
 using Environments.EnvironmentMappings.Options;
 using Environments.EnvironmentMappings.Resolvers;

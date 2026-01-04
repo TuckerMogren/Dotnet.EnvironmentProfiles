@@ -15,6 +15,7 @@ public static class EnvironmentProfileDefaults
         new List<EnvironmentProfile>
         {
             new(EnvironmentProfileNames.Development, CanonicalEnvironment.Development),
+            new(EnvironmentProfileNames.Dev, CanonicalEnvironment.Development),
             new(EnvironmentProfileNames.Local, CanonicalEnvironment.Development),
             new(EnvironmentProfileNames.Cde, CanonicalEnvironment.Development),
             new(EnvironmentProfileNames.Staging, CanonicalEnvironment.Staging),

@@ -13,18 +13,19 @@ var configBuilder = new ConfigurationBuilder()
     .AddEnvironmentVariables()
     .Build();
 
-var configuredName = configBuilder["EnvironmentMappings:EnvironmentName"];
+var configuredName = configBuilder["EnvironmentMappings:EnvironmentName"] ?? "";
 
 try
 {
     
     EnvironmentProfile profile = resolver.Resolve(configuredName);
+    profile.IsDevelopment();
+    profile.IsStaging();
+    profile.IsProduction();
+    profile.IsNonProduction();
     profile.IsUat();
-    profile.IsUat();
-    profile.IsUat();
+    profile.IsQa();
     Console.WriteLine($"Resolved profile: {profile.Name}");
-    Console.WriteLine($"Canonical environment: {profile.CanonicalEnvironment}");
-    Console.WriteLine($"Is non-production: {profile.IsNonProduction()}");
 }
 catch (Exception ex)
 {

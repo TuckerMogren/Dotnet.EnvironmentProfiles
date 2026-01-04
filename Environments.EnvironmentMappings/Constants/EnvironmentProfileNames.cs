@@ -10,6 +10,10 @@ public static class EnvironmentProfileNames
     /// </summary>
     public const string Development = "Development";
     /// <summary>
+    /// The short development environment profile name.
+    /// </summary>
+    public const string Dev = "Dev";
+    /// <summary>
     /// The staging environment profile name.
     /// </summary>
     public const string Staging = "Staging";
