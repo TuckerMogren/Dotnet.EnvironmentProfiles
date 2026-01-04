@@ -2,8 +2,16 @@ using Environments.EnvironmentMappings;
 
 namespace Environments.EnvironmentMappings.Extensions;
 
+/// <summary>
+/// Extension methods for <see cref="IEnvironmentProfileResolver"/>.
+/// </summary>
 public static class EnvironmentProfileResolverExtensions
 {
+    /// <summary>
+    /// Resolves the environment profile from well-known environment variables.
+    /// </summary>
+    /// <param name="resolver">The resolver to use.</param>
+    /// <returns>The resolved environment profile.</returns>
     public static EnvironmentProfile ResolveFromEnvironmentVariables(this IEnvironmentProfileResolver resolver)
     {
         if (resolver is null)
