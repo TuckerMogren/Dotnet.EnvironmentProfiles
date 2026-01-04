@@ -26,6 +26,10 @@ public static class EnvironmentProfileNames
     /// </summary>
     public const string Local = "Local";
     /// <summary>
+    /// The performance environment profile name.
+    /// </summary>
+    public const string Performance = "Performance";
+    /// <summary>
     /// The QA environment profile name.
     /// </summary>
     public const string Qa = "QA";

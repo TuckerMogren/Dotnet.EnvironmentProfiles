@@ -22,6 +22,7 @@ public static class EnvironmentProfileDefaults
             new(EnvironmentProfileNames.Qa, CanonicalEnvironment.Staging),
             new(EnvironmentProfileNames.QualityAssurance, CanonicalEnvironment.Staging),
             new(EnvironmentProfileNames.Uat, CanonicalEnvironment.Staging),
+            new(EnvironmentProfileNames.Performance, CanonicalEnvironment.Performance),
             new(EnvironmentProfileNames.PreProd, CanonicalEnvironment.Staging),
             new(EnvironmentProfileNames.Production, CanonicalEnvironment.Production)
         }.AsReadOnly();
