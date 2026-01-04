@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.0] - 2026-01-03
+
+### Added (0.3.0)
+
+- Added XML documentation across public APIs.
+- Added canonical environment helpers on `EnvironmentProfile` (`IsDevelopment`, `IsStaging`, `IsProduction`, `IsEnvironment`).
+
+### Changed (0.3.0)
+
+- Reorganized namespaces to align with the new folder structure (Constants, Models, Options, Defaults, Resolvers, Exceptions, Abstractions).
+
 ## [0.2.8] - 2025-12-30
 
 ### Added (0.2.8)
