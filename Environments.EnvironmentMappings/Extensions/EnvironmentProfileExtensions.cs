@@ -81,6 +81,18 @@ public static class EnvironmentProfileExtensions
     }
 
     /// <summary>
+    /// Determines whether the profile maps to the production canonical environment.
+    /// </summary>
+    /// <param name="profile">The profile to evaluate.</param>
+    /// <returns><see langword="true"/> if the profile is production; otherwise, <see langword="false"/>.</returns>
+    public static bool IsPreformance(this EnvironmentProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+
+        return profile.CanonicalEnvironment == CanonicalEnvironment.Performance;
+    }
+
+    /// <summary>
     /// Determines whether the profile matches the specified environment name.
     /// </summary>
     /// <param name="profile">The profile to evaluate.</param>
