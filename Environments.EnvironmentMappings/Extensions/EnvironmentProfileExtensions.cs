@@ -42,4 +42,57 @@ public static class EnvironmentProfileExtensions
 
         return profile.CanonicalEnvironment != CanonicalEnvironment.Production;
     }
+
+    /// <summary>
+    /// Determines whether the profile maps to the development canonical environment.
+    /// </summary>
+    /// <param name="profile">The profile to evaluate.</param>
+    /// <returns><see langword="true"/> if the profile is development; otherwise, <see langword="false"/>.</returns>
+    public static bool IsDevelopment(this EnvironmentProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+
+        return profile.CanonicalEnvironment == CanonicalEnvironment.Development;
+    }
+
+    /// <summary>
+    /// Determines whether the profile maps to the staging canonical environment.
+    /// </summary>
+    /// <param name="profile">The profile to evaluate.</param>
+    /// <returns><see langword="true"/> if the profile is staging; otherwise, <see langword="false"/>.</returns>
+    public static bool IsStaging(this EnvironmentProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+
+        return profile.CanonicalEnvironment == CanonicalEnvironment.Staging;
+    }
+
+    /// <summary>
+    /// Determines whether the profile maps to the production canonical environment.
+    /// </summary>
+    /// <param name="profile">The profile to evaluate.</param>
+    /// <returns><see langword="true"/> if the profile is production; otherwise, <see langword="false"/>.</returns>
+    public static bool IsProduction(this EnvironmentProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+
+        return profile.CanonicalEnvironment == CanonicalEnvironment.Production;
+    }
+
+    /// <summary>
+    /// Determines whether the profile matches the specified environment name.
+    /// </summary>
+    /// <param name="profile">The profile to evaluate.</param>
+    /// <param name="environmentName">
+    /// The environment name to compare. This matches either the profile name or the canonical environment name.
+    /// </param>
+    /// <returns><see langword="true"/> if the profile matches the environment name; otherwise, <see langword="false"/>.</returns>
+    public static bool IsEnvironment(this EnvironmentProfile profile, string environmentName)
+    {
+        ArgumentNullException.ThrowIfNull(profile);
+        ArgumentNullException.ThrowIfNull(environmentName);
+
+        return string.Equals(profile.Name, environmentName, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(profile.CanonicalEnvironment.ToString(), environmentName, StringComparison.OrdinalIgnoreCase);
+    }
 }

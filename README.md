@@ -54,6 +54,9 @@ var resolver = provider.GetRequiredService<IEnvironmentProfileResolver>();
 
 var profile = resolver.Resolve("QA");
 var isNonProd = profile.IsNonProduction();
+var isStaging = profile.IsStaging();
+var isQa = profile.IsEnvironment("QA");
+var isCanonical = profile.IsEnvironment("Staging");
 ```
 
 ## Environment Variable Resolution
@@ -77,6 +80,26 @@ using Environments.EnvironmentMappings.Extensions;
 
 var builder = Host.CreateDefaultBuilder(args)
     .UseCanonicalEnvironmentMappings();
+```
+
+## Environment Profile Checks
+
+Environment profiles also expose convenience checks that mirror the host environment extensions. These
+operate on the profile's canonical environment and can also match the profile name when using
+`IsEnvironment`.
+
+```csharp
+var profile = resolver.Resolve("QA");
+
+if (profile.IsStaging())
+{
+    // Canonical environment check.
+}
+
+if (profile.IsEnvironment("QA"))
+{
+    // Matches the profile name.
+}
 ```
 
 ## Host Environment Integration

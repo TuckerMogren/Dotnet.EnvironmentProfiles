@@ -15,8 +15,8 @@ var configuredName = configBuilder["EnvironmentMappings:EnvironmentName"];
 
 try
 {
+    
     EnvironmentProfile profile = resolver.Resolve(configuredName);
-    profile.IsDeve();
     profile.IsUat();
     profile.IsUat();
     profile.IsUat();
