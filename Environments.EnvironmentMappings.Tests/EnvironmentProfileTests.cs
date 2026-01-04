@@ -6,6 +6,7 @@ using Environments.EnvironmentMappings.Models;
 using Environments.EnvironmentMappings.Options;
 using Environments.EnvironmentMappings.Resolvers;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Environments.EnvironmentMappings.Tests;
@@ -22,12 +23,23 @@ public class EnvironmentProfileTests
         Assert.Throws<ArgumentException>(() => new EnvironmentProfile(name!, CanonicalEnvironment.Production));
     }
 
+    [Fact]
+    public void EnvironmentProfile_Sets_Name_And_Canonical_Environment()
+    {
+        var profile = new EnvironmentProfile("Dev", CanonicalEnvironment.Development);
+
+        Assert.Equal("Dev", profile.Name);
+        Assert.Equal(CanonicalEnvironment.Development, profile.CanonicalEnvironment);
+    }
+
     [Theory]
     [InlineData("QA", EnvironmentProfileNames.Qa, CanonicalEnvironment.Staging)]
     [InlineData("qa", EnvironmentProfileNames.Qa, CanonicalEnvironment.Staging)]
     [InlineData("CDE", EnvironmentProfileNames.Cde, CanonicalEnvironment.Development)]
+    [InlineData("Dev", EnvironmentProfileNames.Dev, CanonicalEnvironment.Development)]
     [InlineData("QualityAssurance", EnvironmentProfileNames.QualityAssurance, CanonicalEnvironment.Staging)]
     [InlineData("Local", EnvironmentProfileNames.Local, CanonicalEnvironment.Development)]
+    [InlineData("Performance", EnvironmentProfileNames.Performance, CanonicalEnvironment.Performance)]
     [InlineData("Production", EnvironmentProfileNames.Production, CanonicalEnvironment.Production)]
     public void Resolver_Uses_Default_Profiles(
         string environmentName,
@@ -78,12 +90,58 @@ public class EnvironmentProfileTests
         Assert.Equal(CanonicalEnvironment.Production, profile.CanonicalEnvironment);
     }
 
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Resolver_Throws_For_Invalid_Environment_Name(string? environmentName)
+    {
+        var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
+
+        Assert.Throws<ArgumentException>(() => resolver.Resolve(environmentName!));
+    }
+
+    [Fact]
+    public void Resolver_Throws_For_Null_Options()
+    {
+        Assert.Throws<ArgumentNullException>(() => new EnvironmentProfileResolver(null!));
+    }
+
+    [Fact]
+    public void ResolverOptions_ClearProfiles_Removes_Defaults()
+    {
+        var options = new EnvironmentProfileResolverOptions();
+
+        Assert.NotEmpty(options.Profiles);
+
+        options.ClearProfiles();
+
+        Assert.Empty(options.Profiles);
+    }
+
+    [Fact]
+    public void ResolverOptions_Throws_For_Null_Profile()
+    {
+        var options = new EnvironmentProfileResolverOptions();
+
+        Assert.Throws<ArgumentNullException>(() => options.SetProfile(null!));
+    }
+
+    [Fact]
+    public void ResolverOptions_Throws_For_Null_Profile_List()
+    {
+        var options = new EnvironmentProfileResolverOptions();
+
+        Assert.Throws<ArgumentNullException>(() => options.AddProfiles(null!));
+    }
+
     [Fact]
     public void EnvironmentProfileExtensions_Use_Profile_Name_And_Canonical_Environment()
     {
         var qaProfile = new EnvironmentProfile("qa", CanonicalEnvironment.Staging);
         var devProfile = new EnvironmentProfile("dev", CanonicalEnvironment.Development);
         var prodProfile = new EnvironmentProfile(EnvironmentProfileNames.Production, CanonicalEnvironment.Production);
+        var perfProfile = new EnvironmentProfile(EnvironmentProfileNames.Performance, CanonicalEnvironment.Performance);
 
         Assert.True(qaProfile.IsQa());
         Assert.False(qaProfile.IsUat());
@@ -105,6 +163,9 @@ public class EnvironmentProfileTests
         Assert.False(prodProfile.IsDevelopment());
         Assert.False(prodProfile.IsStaging());
         Assert.True(prodProfile.IsEnvironment("Production"));
+
+        Assert.True(perfProfile.IsPerformance());
+        Assert.True(perfProfile.IsEnvironment("Performance"));
     }
 
     [Fact]
@@ -120,6 +181,78 @@ public class EnvironmentProfileTests
     }
 
     [Fact]
+    public void ServiceCollectionExtensions_Register_Resolver_And_Options()
+    {
+        var services = new ServiceCollection();
+
+        services.AddEnvironmentProfiles(options =>
+        {
+            options.UnknownEnvironmentBehavior = UnknownEnvironmentBehavior.UseFallbackCanonicalEnvironment;
+        });
+
+        using var provider = services.BuildServiceProvider();
+
+        var resolver = provider.GetRequiredService<IEnvironmentProfileResolver>();
+        var options = provider.GetRequiredService<EnvironmentProfileResolverOptions>();
+
+        Assert.NotNull(resolver);
+        Assert.Equal(UnknownEnvironmentBehavior.UseFallbackCanonicalEnvironment, options.UnknownEnvironmentBehavior);
+    }
+
+    [Fact]
+    public void HostBuilderExtensions_Use_Canonical_Environment_Mapping()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, "QA");
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, null);
+
+            using var host = new HostBuilder()
+                .UseCanonicalEnvironmentMappings()
+                .Build();
+
+            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+
+            Assert.Equal(CanonicalEnvironment.Staging.ToString(), hostEnvironment.EnvironmentName);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
+    }
+
+    [Fact]
+    public void HostBuilderExtensions_Ignore_Missing_Environment_Variables()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, null);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, null);
+
+            using var host = new HostBuilder()
+                .UseEnvironment("Development")
+                .UseCanonicalEnvironmentMappings()
+                .Build();
+
+            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+
+            Assert.Equal("Development", hostEnvironment.EnvironmentName);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
+    }
+
+    [Fact]
     public void Resolver_Uses_DotnetEnvironment_When_Set()
     {
         var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
@@ -129,6 +262,30 @@ public class EnvironmentProfileTests
         {
             Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, "QA");
             Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, "Production");
+
+            var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
+
+            var profile = resolver.ResolveFromEnvironmentVariables();
+
+            Assert.Equal(EnvironmentProfileNames.Qa, profile.Name);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, originalDotnet);
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, originalAspnet);
+        }
+    }
+
+    [Fact]
+    public void Resolver_Uses_AspNetCoreEnvironment_When_DotnetEnvironment_Whitespace()
+    {
+        var originalDotnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment);
+        var originalAspnet = Environment.GetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment);
+
+        try
+        {
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.DotnetEnvironment, " ");
+            Environment.SetEnvironmentVariable(EnvironmentVariableNames.AspNetCoreEnvironment, "QA");
 
             var resolver = new EnvironmentProfileResolver(new EnvironmentProfileResolverOptions());
 

@@ -16,5 +16,9 @@ public enum CanonicalEnvironment
     /// <summary>
     /// The production environment.
     /// </summary>
-    Production
+    Production, 
+    /// <summary>
+    /// The performance environment.
+    /// </summary>
+    Performance, 
 }

@@ -27,11 +27,13 @@ The resolver ships with the following defaults. You can override or replace them
 | :----------- | :-------------------- |
 | CDE          | Development           |
 | Development  | Development           |
+| Dev          | Development           |
 | Local        | Development           |
 | Staging      | Staging               |
 | QA           | Staging               |
 | QualityAssurance | Staging           |
 | UAT          | Staging               |
+| Performance  | Staging               |
 | PreProd      | Staging               |
 | Production   | Production            |
 

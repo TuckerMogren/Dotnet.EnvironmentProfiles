@@ -10,6 +10,10 @@ public static class EnvironmentProfileNames
     /// </summary>
     public const string Development = "Development";
     /// <summary>
+    /// The short development environment profile name.
+    /// </summary>
+    public const string Dev = "Dev";
+    /// <summary>
     /// The staging environment profile name.
     /// </summary>
     public const string Staging = "Staging";
@@ -21,6 +25,10 @@ public static class EnvironmentProfileNames
     /// The local environment profile name.
     /// </summary>
     public const string Local = "Local";
+    /// <summary>
+    /// The performance environment profile name.
+    /// </summary>
+    public const string Performance = "Performance";
     /// <summary>
     /// The QA environment profile name.
     /// </summary>
