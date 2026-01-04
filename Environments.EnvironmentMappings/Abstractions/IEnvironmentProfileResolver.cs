@@ -1,4 +1,6 @@
-namespace Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Models;
+
+namespace Environments.EnvironmentMappings.Abstractions;
 
 /// <summary>
 /// Resolves environment names to canonical profiles.

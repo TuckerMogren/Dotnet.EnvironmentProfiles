@@ -1,4 +1,4 @@
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Models;
 
 /// <summary>
 /// Defines an environment profile name and its canonical environment mapping.

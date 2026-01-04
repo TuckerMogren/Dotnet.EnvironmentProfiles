@@ -1,4 +1,9 @@
-namespace Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
+using Environments.EnvironmentMappings.Exceptions;
+using Environments.EnvironmentMappings.Models;
+using Environments.EnvironmentMappings.Options;
+
+namespace Environments.EnvironmentMappings.Resolvers;
 
 /// <summary>
 /// Resolves environment names to configured profiles.

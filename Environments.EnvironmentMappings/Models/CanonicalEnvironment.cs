@@ -1,4 +1,4 @@
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Models;
 
 /// <summary>
 /// Represents the normalized set of supported environments.

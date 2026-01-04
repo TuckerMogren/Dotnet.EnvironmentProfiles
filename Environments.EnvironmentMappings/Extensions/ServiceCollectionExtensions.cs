@@ -1,4 +1,6 @@
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
+using Environments.EnvironmentMappings.Options;
+using Environments.EnvironmentMappings.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Environments.EnvironmentMappings.Extensions;

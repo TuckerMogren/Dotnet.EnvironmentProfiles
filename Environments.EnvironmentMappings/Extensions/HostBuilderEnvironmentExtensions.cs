@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Constants;
+using Environments.EnvironmentMappings.Options;
+using Environments.EnvironmentMappings.Resolvers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 

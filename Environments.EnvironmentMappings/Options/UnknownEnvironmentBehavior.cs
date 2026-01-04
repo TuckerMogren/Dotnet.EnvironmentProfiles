@@ -1,4 +1,4 @@
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Options;
 
 /// <summary>
 /// Defines how unknown environment names are handled.

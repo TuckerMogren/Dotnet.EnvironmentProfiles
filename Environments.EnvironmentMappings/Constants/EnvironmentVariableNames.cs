@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Reflection.Metadata;
 using System.Text;
 
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Constants;
 
 /// <summary>
 /// Provides environment variable names used to resolve environment profiles.

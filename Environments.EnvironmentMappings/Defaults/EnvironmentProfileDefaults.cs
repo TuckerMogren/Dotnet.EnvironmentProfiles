@@ -1,4 +1,7 @@
-namespace Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Constants;
+using Environments.EnvironmentMappings.Models;
+
+namespace Environments.EnvironmentMappings.Defaults;
 
 /// <summary>
 /// Provides default environment profile mappings.

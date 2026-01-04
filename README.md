@@ -8,7 +8,7 @@ canonical ASP.NET Core behavior (Development, Staging, Production).
 
 ## NuGet Package
 
-Package ID: `Environments.EnvironmentMappings`. Namespace: `Environments.EnvironmentMappings`.
+Package ID: `Environments.EnvironmentMappings`. Namespaces: `Environments.EnvironmentMappings.*`.
 Package metadata is defined in `Environments.EnvironmentMappings.nuspec`. The changelog is in
 `CHANGELOG.md` and each release should update both the package version and `releaseNotes`.
 Targets: `net6.0` and `net10.0`.
@@ -38,8 +38,10 @@ The resolver ships with the following defaults. You can override or replace them
 ## Usage
 
 ```csharp
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
 using Environments.EnvironmentMappings.Extensions;
+using Environments.EnvironmentMappings.Models;
+using Environments.EnvironmentMappings.Options;
 
 var services = new ServiceCollection();
 services.AddEnvironmentProfiles(options =>
@@ -105,7 +107,9 @@ if (profile.IsEnvironment("QA"))
 ## Host Environment Integration
 
 ```csharp
+using Environments.EnvironmentMappings.Abstractions;
 using Environments.EnvironmentMappings.Extensions;
+using Environments.EnvironmentMappings.Models;
 using Microsoft.Extensions.Hosting;
 
 IHostEnvironment hostEnvironment = ...;

@@ -1,4 +1,4 @@
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Constants;
 
 /// <summary>
 /// Provides commonly used environment profile names.

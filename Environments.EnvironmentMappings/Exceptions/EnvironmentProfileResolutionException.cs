@@ -1,4 +1,4 @@
-namespace Environments.EnvironmentMappings;
+namespace Environments.EnvironmentMappings.Exceptions;
 
 /// <summary>
 /// The exception thrown when an environment name cannot be resolved to a profile.

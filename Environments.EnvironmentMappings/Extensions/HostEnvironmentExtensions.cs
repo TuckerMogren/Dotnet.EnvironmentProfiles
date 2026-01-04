@@ -1,4 +1,5 @@
-using Environments.EnvironmentMappings;
+using Environments.EnvironmentMappings.Abstractions;
+using Environments.EnvironmentMappings.Models;
 using Microsoft.Extensions.Hosting;
 
 namespace Environments.EnvironmentMappings.Extensions;
